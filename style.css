@@ -1,0 +1,198 @@
+* {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 400;
+}
+
+html {
+    height: 100%;
+    max-width: 100%;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    min-width: 100%;
+    justify-content: space-between;
+    background-color: var(--color2);
+}
+
+header {
+    background-color: var(--color5);
+    height: 7rem;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas: "titulo btns";
+    grid-column-gap: 4rem;
+    width: 100%;
+    padding: 0 10%;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+}
+
+#title {
+    margin: 0;
+    grid-area: titulo;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.buttons {
+    height: 100%;
+    grid-area: btns;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1.5fr;
+}
+
+.btnHeader {
+    display: flex;
+    font-size: 1rem;
+    border: 0;
+    transition: all 0.3s;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 0.125rem rgba(0,0,0,0.4);
+    margin: 1rem;
+    justify-content: space-around;
+}
+
+.btnHeader:focus {
+    background-color: var(--color3);
+}
+
+.btnHeader::selection, .footerText::selection, #title::selection {
+    background-color: transparent;
+}
+
+.text {
+    text-shadow: 0 0.0625rem 0.3125rem var(--color3);
+    text-decoration: none;
+    color: white;
+    text-transform: capitalize;
+    word-break: normal;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.footerText {
+    font-size: 1.2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.textMain {
+    color: var(--color3);
+}
+
+.btnHeader:hover {
+    font-size: 1.2rem;
+    background-color: var(--color2);
+}
+
+#comprar {
+    text-transform: uppercase;
+    font-size: 1.5rem;
+}
+
+#comprar:hover {
+    font-size: 1.7rem;
+}
+
+main {
+    background-color: white;
+    flex-grow: 1;
+    padding: 7rem 2.5rem 1rem 2.5rem;
+}
+
+footer {
+    justify-self: end;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    text-align: center;
+    color: white;
+    padding: 1.5rem;
+    background-color: var(--color4);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#precos {
+    height: 30rem;
+    box-sizing: border-box;
+    display: flex;
+    column-gap: 2rem;
+    justify-content: center;
+}
+
+.opcaoCompra {
+    box-shadow: -0.375rem 0.25rem 0 var(--color-card-shadow);
+    width: 20rem;
+    box-sizing: border-box;
+    background-color: var(--color-card);
+    border-radius: 4rem 0 4rem 0;
+    transition: all 0.3s linear;
+    margin: 1.5rem 3rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#promocao {
+    margin: 0;
+}
+
+.opcaoCompra:hover {
+    box-shadow: 0 0 0.3125rem var(--color3);
+}
+
+.tituloPacote {
+    margin: 1rem 0;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.beneficios {
+    margin: 0 0 1rem 0;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.comprar {
+    border-radius: 5rem;
+    background: none;
+    border: 0.1875rem solid var(--color-card-shadow);
+    height: 2.5rem;
+    text-align: center;
+    width: 13rem;
+    box-sizing: border-box;
+    padding: 0;
+    transition: all 0.2s linear;
+    font-weight: 500;
+}
+
+.comprar:hover {
+    border-color: var(--color-btn-buy-hover);
+}
+
+:root {
+    --color1: #45E9FF;
+    --color2: #1A181C;
+    --color3: #040404;
+    --color4: #0A5A60;
+    --color5: #3BA19C;
+    --color-card: #F2F5FA;
+    --color-card-shadow: #4E5563;
+    --color-btn-buy-hover: #4EA687;
+}
