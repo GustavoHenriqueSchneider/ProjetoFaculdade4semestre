@@ -28,7 +28,9 @@
                 <i class="bi bi-chat-left-dots-fill"></i>
             </a>
             <a id="comprar" class="btnHeader text" href="comprar.html">Adquirir
-                <i class="bi bi-cart-fill"></i>
+                <i class="bi bi-cart-fill">
+                    <strong id='qntdCarrinho'>( 0 )</strong>
+                </i>
             </a>
         </nav>
     </header>
@@ -54,7 +56,7 @@
         </div>
         <div id="precos">
             <div class="opcaoCompra">
-                <h3 class="tituloPacote">Pacote Mensal</h3>
+                <h3 class="tituloPacote">Pacote <strong class="plano">Mensal</strong></h3>
                 <ul>
                     <h4 class="beneficios">Beneficios</h4>
                     <li>TESTE</li>
@@ -62,12 +64,28 @@
                     <li>TESTE</li>
                     <li>TESTE</li>
                 </ul>
-                <button class="comprar">COMPRAR ( R$ 29,99 )</button>
+                <div class="comprar">
+                    <span class="preco">R$ 29,99</span>
+
+                    <button class="diminuirQntd">
+                        <i class="bi bi-dash"></i>
+                    </button>
+
+                    <input class="qntd" type="number" value="1"></input>
+
+                    <button class="aumentarQntd">
+                        <i class="bi bi-plus"></i>
+                    </button>
+
+                    <button class="adicionarCarrinho">
+                        <i class="bi bi-cart-plus"></i>
+                    </button>
+                </div>
             </div>
             <div id="promocao" class="opcaoCompra">
                 <h3 class="tituloPacote">
                     <i class="bi bi-star"></i>
-                    Pacote Anual
+                    Pacote <strong class="plano">Anual</strong>
                     <i class="bi bi-star"></i>
                 </h3>
                 <ul>
@@ -77,10 +95,26 @@
                     <li>TESTE</li>
                     <li>TESTE</li>
                 </ul>
-                <button class="comprar">COMPRAR ( R$ 291,49 )</button>
+                <div class="comprar">
+                    <span class="preco">R$ 291,49</span>
+
+                    <button class="diminuirQntd">
+                        <i class="bi bi-dash"></i>
+                    </button>
+
+                    <input class="qntd" type="number" value="1"></input>
+
+                    <button class="aumentarQntd">
+                        <i class="bi bi-plus"></i>
+                    </button>
+
+                    <button class="adicionarCarrinho">
+                        <i class="bi bi-cart-plus"></i>
+                    </button>
+                </div>
             </div>
             <div class="opcaoCompra">
-                <h3 class="tituloPacote">Pacote Semestral</h3>
+                <h3 class="tituloPacote">Pacote <strong class="plano">Semestral</strong></h3>
                 <ul>
                     <h4 class="beneficios">Beneficios</h4>
                     <li>TESTE</li>
@@ -88,13 +122,30 @@
                     <li>TESTE</li>
                     <li>TESTE</li>
                 </ul>
-                <button class="comprar">COMPRAR ( R$161,94 )</button>
+                <div class="comprar">
+                    <span class="preco">R$ 161,94</span>
+
+                    <button class="diminuirQntd">
+                        <i class="bi bi-dash"></i>
+                    </button>
+
+                    <input class="qntd" type="number" value="1"></input>
+
+                    <button class="aumentarQntd">
+                        <i class="bi bi-plus"></i>
+                    </button>
+
+                    <button class="adicionarCarrinho">
+                        <i class="bi bi-cart-plus"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </main>
     <footer>
         <h4 class="text footerText">Alarm Safe - Projeto Uninove 2º Semestre 2021</h4>
     </footer>
+    <script type="module" src="main.js"></script>
 </body>
 
 </html>
