@@ -1,13 +1,13 @@
 import { diminuirQntd } from "./componentes/alterarQntd.js"
 import { aumentarQntd } from "./componentes/alterarQntd.js"
 import { adicionarCarrinho } from "./componentes/adicionarCarrinho.js"
-import { dadosCarrinho } from "./componentes/carregarDados.js"
+import { quantidadeCarrinho } from "./componentes/carregarDados.js"
 
 const btnDiminuirQntd = document.querySelectorAll('.diminuirQntd')
 const btnAumentarQntd = document.querySelectorAll('.aumentarQntd')
 const btnAdicionarCarrinho = document.querySelectorAll('.adicionarCarrinho')
 
-dadosCarrinho()
+quantidadeCarrinho()
 
 for(let btn of btnDiminuirQntd){
     btn.addEventListener('click', () => {

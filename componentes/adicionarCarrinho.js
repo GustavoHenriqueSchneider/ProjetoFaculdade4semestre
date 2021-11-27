@@ -1,18 +1,27 @@
-import { dadosCarrinho } from "./carregarDados.js"
+import { quantidadeCarrinho } from "./carregarDados.js"
 
-export const adicionarCarrinho = (parent) => {
+export const adicionarCarrinho = (parent, plano, carrinhoDireto) => {
 
     let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || carrinhoVazio()
-    const plano = parent.querySelector('.plano').textContent
-    const qntd = parseInt(parent.querySelector('.qntd').value, 10)
+
+    if (!plano)
+        plano = parent.querySelector('.plano').textContent
+
+    if (!carrinhoDireto)
+        carrinhoDireto = false
+
+    const qntd = parseInt(parent.querySelector('.qntd').textContent, 10)
 
     const quantidadeAtual = parseInt(carrinho.planos[plano].quantidade, 10)
 
-    carrinho.planos[plano].quantidade = (quantidadeAtual + qntd)
+    if (carrinhoDireto)
+        carrinho.planos[plano].quantidade = qntd
+    else
+        carrinho.planos[plano].quantidade = (quantidadeAtual + qntd)
 
     sessionStorage.setItem('carrinho', JSON.stringify(carrinho))
 
-    dadosCarrinho()
+    quantidadeCarrinho()
 }
 
 export const carrinhoVazio = () => {
