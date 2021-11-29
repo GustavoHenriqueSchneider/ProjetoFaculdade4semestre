@@ -1,4 +1,7 @@
 import { carrinhoVazio } from "./adicionarCarrinho.js"
+import { diminuirQntdCarrinho } from "./alterarQntd.js"
+import { aumentarQntdCarrinho } from "./alterarQntd.js"
+import { removerItemCarrinho } from "./removerItem.js"
 
 export const quantidadeCarrinho = () => {
 
@@ -19,11 +22,16 @@ export const quantidadeCarrinho = () => {
 
 export const itensCarrinho = () => {
 
+    const itensCarrinho = document.querySelectorAll('.item')
+    const carrinho = document.getElementById('carrinho')
+
+    for (let item of itensCarrinho) {
+        carrinho.removeChild(item)
+    }
+
     const qtnd = quantidadeCarrinho()
 
     if (qtnd > 0) {
-
-        const carrinho = document.getElementById('carrinho')
 
         const itens = JSON.parse(sessionStorage.getItem('carrinho')).planos
 
@@ -71,7 +79,7 @@ export const itensCarrinho = () => {
                     let th = document.createElement('th')
                     th.textContent = `R$ ${precos[i].toFixed(2)}`
 
-                    if (i===1 && precos[i] === precoTotalItem)
+                    if (i === 1 && precos[i] === precoTotalItem)
                         th.classList.add('precoTotalItem')
 
                     tr.appendChild(th)
@@ -140,18 +148,35 @@ export const itensCarrinho = () => {
                 div.appendChild(controls)
 
                 carrinho.appendChild(div)
-
-                calcularTotal()
             }
         }
 
+        const btnDiminuirQntd = document.querySelectorAll('.diminuirQntd')
+        const btnAumentarQntd = document.querySelectorAll('.aumentarQntd')
+        const btnRemoverItemCarrinho = document.querySelectorAll('.removerItem')
 
+        for (let btn of btnDiminuirQntd) {
+            btn.addEventListener('click', () => {
+                diminuirQntdCarrinho(btn.parentNode)
+            })
+        }
 
+        for (let btn of btnAumentarQntd) {
+            btn.addEventListener('click', () => {
+                aumentarQntdCarrinho(btn.parentNode)
+            })
+        }
 
+        for (let btn of btnRemoverItemCarrinho) {
+            btn.addEventListener('click', () => {
+                removerItemCarrinho(btn.parentNode.parentNode)
+            })
+        }
+
+        return true
     }
-    else {
 
-    }
+
 }
 
 export const calcularTotalItem = (parent, plano) => {
@@ -162,9 +187,9 @@ export const calcularTotalItem = (parent, plano) => {
     const quantidade = carrinho.planos[plano].quantidade
 
     const precoTotal = parent.parentNode.querySelector('.precoTotalItem')
-    const total = preco*quantidade
+    const total = preco * quantidade
 
-    precoTotal.textContent = total.toFixed(2)
+    precoTotal.textContent = `R$ ${total.toFixed(2)}`
 }
 
 const calcularTotal = () => {
