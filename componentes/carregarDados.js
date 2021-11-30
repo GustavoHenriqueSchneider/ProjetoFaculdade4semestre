@@ -2,6 +2,8 @@ import { carrinhoVazio } from "./adicionarCarrinho.js"
 import { diminuirQntdCarrinho } from "./alterarQntd.js"
 import { aumentarQntdCarrinho } from "./alterarQntd.js"
 import { removerItemCarrinho } from "./removerItem.js"
+import { calcularFrete } from "./frete.js"
+import { loadingPanel } from "./loading.js"
 
 export const quantidadeCarrinho = () => {
 
@@ -23,7 +25,10 @@ export const quantidadeCarrinho = () => {
 export const itensCarrinho = () => {
 
     const itensCarrinho = document.querySelectorAll('.item')
+
     const carrinho = document.getElementById('carrinho')
+    const totalCarrinho = document.getElementById('total')
+    const mensagemVazio = document.getElementById('mensagemCarrinhoVazio')
 
     for (let item of itensCarrinho) {
         carrinho.removeChild(item)
@@ -33,7 +38,13 @@ export const itensCarrinho = () => {
 
     if (qtnd > 0) {
 
+        mensagemVazio.classList.replace('enabled', 'disabled')
+        carrinho.classList.replace('disabled', 'enabled')
+        totalCarrinho.classList.replace('disabled', 'enabled')
+
         const itens = JSON.parse(sessionStorage.getItem('carrinho')).planos
+
+        let numeroItem = 1
 
         for (let item in itens) {
 
@@ -44,7 +55,7 @@ export const itensCarrinho = () => {
 
                 let text = document.createElement('h3')
                 text.classList.add('tituloItem')
-                text.textContent = `Pacote `
+                text.textContent = `${numeroItem} - Pacote `
 
                 let plano = document.createElement('strong')
                 plano.classList.add('plano')
@@ -77,7 +88,7 @@ export const itensCarrinho = () => {
 
                 for (let i = 0; i < precos.length; i++) {
                     let th = document.createElement('th')
-                    th.textContent = `R$ ${precos[i].toFixed(2)}`
+                    th.textContent = `R$ ${precos[i].toFixed(2).replace('.',',')}`
 
                     if (i === 1 && precos[i] === precoTotalItem)
                         th.classList.add('precoTotalItem')
@@ -148,6 +159,8 @@ export const itensCarrinho = () => {
                 div.appendChild(controls)
 
                 carrinho.appendChild(div)
+
+                numeroItem++
             }
         }
 
@@ -173,10 +186,12 @@ export const itensCarrinho = () => {
             })
         }
 
-        return true
+        return calcularTotal()
     }
 
-
+    carrinho.classList.replace('enabled', 'disabled')
+    totalCarrinho.classList.replace('enabled', 'disabled')
+    mensagemVazio.classList.replace('disabled', 'enabled')
 }
 
 export const calcularTotalItem = (parent, plano) => {
@@ -189,9 +204,26 @@ export const calcularTotalItem = (parent, plano) => {
     const precoTotal = parent.parentNode.querySelector('.precoTotalItem')
     const total = preco * quantidade
 
-    precoTotal.textContent = `R$ ${total.toFixed(2)}`
+    precoTotal.textContent = `R$ ${total.toFixed(2).replace('.',',')}`
 }
 
 const calcularTotal = () => {
+    const valorTotalItens = document.querySelectorAll('.precoTotalItem')
+    const valorTotalSpan = document.querySelector('#precoTotal > strong')
 
+    let valorTotal = 0
+
+    for(let valorTotalItem of valorTotalItens)
+        valorTotal += parseInt(valorTotalItem, 10)
+     
+    valorTotalSpan.textContent = valorTotal
+
+    const radiosFrete = document.querySelectorAll('input[id^="frete"]')
+
+    for(let radio of radiosFrete)
+        radio.addEventListener('click', () => {
+            loadingPanel(calcularFrete, radio.value)
+        })
+
+    return true
 }

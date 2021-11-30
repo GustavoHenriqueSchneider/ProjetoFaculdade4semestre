@@ -1,5 +1,6 @@
 import { adicionarCarrinho } from "./adicionarCarrinho.js"
 import { itensCarrinho } from "./carregarDados.js"
+import { loadingPanel } from "./loading.js"
 
 export const removerItemCarrinho = (parent) => {
     const plano = parent.querySelector('.plano').textContent
@@ -9,5 +10,5 @@ export const removerItemCarrinho = (parent) => {
     campoQntd.textContent = 0
 
     adicionarCarrinho(parent, plano, true)
-    itensCarrinho()
+    loadingPanel(itensCarrinho)
 }

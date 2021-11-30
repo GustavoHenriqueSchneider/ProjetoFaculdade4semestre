@@ -1,4 +1,5 @@
 import { quantidadeCarrinho } from "./carregarDados.js"
+import { loadingPanel } from "./loading.js"
 
 export const adicionarCarrinho = (parent, plano, carrinhoDireto) => {
 
@@ -21,7 +22,10 @@ export const adicionarCarrinho = (parent, plano, carrinhoDireto) => {
 
     sessionStorage.setItem('carrinho', JSON.stringify(carrinho))
 
-    quantidadeCarrinho()
+    if (!carrinhoDireto)
+        loadingPanel(quantidadeCarrinho)
+    else
+        quantidadeCarrinho()
 }
 
 export const carrinhoVazio = () => {
