@@ -1,11 +1,8 @@
 import { carrinhoVazio } from "./adicionarCarrinho.js"
-import { diminuirQntdCarrinho } from "./alterarQntd.js"
-import { aumentarQntdCarrinho } from "./alterarQntd.js"
-import { removerItemCarrinho } from "./removerItem.js"
 import { calcularFrete } from "./frete.js"
-import { loadingPanel } from "./loading.js"
+import { buyListeners } from "./listeners.js"
 
-export const quantidadeCarrinho = () => {
+export const quantidadeCarrinho = async () => {
 
     let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || carrinhoVazio()
     let quantidadeCarrinho = 0
@@ -17,12 +14,15 @@ export const quantidadeCarrinho = () => {
             quantidadeCarrinho++
     }
 
-    itensCarrinho.textContent = `( ${quantidadeCarrinho} )`
+    if (quantidadeCarrinho > 0)
+        itensCarrinho.textContent = `( ${quantidadeCarrinho} )`
+    else if (itensCarrinho.textContent !== '')
+        itensCarrinho.textContent = ''
 
     return quantidadeCarrinho
 }
 
-export const itensCarrinho = () => {
+export const itensCarrinho = async (insertListeners) => {
 
     const itensCarrinho = document.querySelectorAll('.item')
 
@@ -34,7 +34,7 @@ export const itensCarrinho = () => {
         carrinho.removeChild(item)
     }
 
-    const qtnd = quantidadeCarrinho()
+    const qtnd = await quantidadeCarrinho()
 
     if (qtnd > 0) {
 
@@ -88,7 +88,7 @@ export const itensCarrinho = () => {
 
                 for (let i = 0; i < precos.length; i++) {
                     let th = document.createElement('th')
-                    th.textContent = `R$ ${precos[i].toFixed(2).replace('.',',')}`
+                    th.textContent = `R$ ${precos[i].toFixed(2).replace('.', ',')}`
 
                     if (i === 1 && precos[i] === precoTotalItem)
                         th.classList.add('precoTotalItem')
@@ -164,37 +164,20 @@ export const itensCarrinho = () => {
             }
         }
 
-        const btnDiminuirQntd = document.querySelectorAll('.diminuirQntd')
-        const btnAumentarQntd = document.querySelectorAll('.aumentarQntd')
-        const btnRemoverItemCarrinho = document.querySelectorAll('.removerItem')
+        if (insertListeners)
+            await buyListeners()
 
-        for (let btn of btnDiminuirQntd) {
-            btn.addEventListener('click', () => {
-                diminuirQntdCarrinho(btn.parentNode)
-            })
-        }
-
-        for (let btn of btnAumentarQntd) {
-            btn.addEventListener('click', () => {
-                aumentarQntdCarrinho(btn.parentNode)
-            })
-        }
-
-        for (let btn of btnRemoverItemCarrinho) {
-            btn.addEventListener('click', () => {
-                removerItemCarrinho(btn.parentNode.parentNode)
-            })
-        }
-
-        return calcularTotal()
+        return await calcularTotal()
     }
 
     carrinho.classList.replace('enabled', 'disabled')
     totalCarrinho.classList.replace('enabled', 'disabled')
     mensagemVazio.classList.replace('disabled', 'enabled')
+
+    return false
 }
 
-export const calcularTotalItem = (parent, plano) => {
+export const calcularTotalItem = async (parent, plano) => {
 
     let carrinho = JSON.parse(sessionStorage.getItem('carrinho'))
 
@@ -204,26 +187,23 @@ export const calcularTotalItem = (parent, plano) => {
     const precoTotal = parent.parentNode.querySelector('.precoTotalItem')
     const total = preco * quantidade
 
-    precoTotal.textContent = `R$ ${total.toFixed(2).replace('.',',')}`
+    precoTotal.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`
 }
 
-const calcularTotal = () => {
+export const calcularTotal = async () => {
     const valorTotalItens = document.querySelectorAll('.precoTotalItem')
     const valorTotalSpan = document.querySelector('#precoTotal > strong')
 
     let valorTotal = 0
 
-    for(let valorTotalItem of valorTotalItens)
-        valorTotal += parseInt(valorTotalItem, 10)
-     
-    valorTotalSpan.textContent = valorTotal
+    for (let valorTotalItem of valorTotalItens) {
+        let valor = valorTotalItem.textContent.replace('R$ ', '').replace(',', '.')
+        valorTotal += parseFloat(valor)
+    }
 
-    const radiosFrete = document.querySelectorAll('input[id^="frete"]')
+    valorTotal += await calcularFrete()
 
-    for(let radio of radiosFrete)
-        radio.addEventListener('click', () => {
-            loadingPanel(calcularFrete, radio.value)
-        })
+    valorTotalSpan.textContent = valorTotal.toFixed(2).toString().replace('.', ',')
 
     return true
 }

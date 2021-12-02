@@ -1,5 +1,5 @@
 
-export const loadingPanel = (funcao, param1, param2) => {
+export const loadingPanel = async (funcao, param1, param2) => {
 
     const delay = 1000
 
@@ -14,14 +14,14 @@ export const loadingPanel = (funcao, param1, param2) => {
     let body = document.querySelector('body')
     body.appendChild(loading)
 
-    setTimeout(function () {
+    setTimeout(async () => {
 
         if (param1 && param2)
-            funcao(param1, param2)
+            await funcao(param1, param2)
         else if (param1)
-            funcao(param1)
+            await funcao(param1)
         else
-            funcao()
+            await funcao()
 
         const body = document.querySelector('body')
         const loading = document.querySelector('.loading')

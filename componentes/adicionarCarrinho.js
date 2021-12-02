@@ -1,7 +1,7 @@
 import { quantidadeCarrinho } from "./carregarDados.js"
 import { loadingPanel } from "./loading.js"
 
-export const adicionarCarrinho = (parent, plano, carrinhoDireto) => {
+export const adicionarCarrinho = async (parent, plano, carrinhoDireto) => {
 
     let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || carrinhoVazio()
 
@@ -23,12 +23,12 @@ export const adicionarCarrinho = (parent, plano, carrinhoDireto) => {
     sessionStorage.setItem('carrinho', JSON.stringify(carrinho))
 
     if (!carrinhoDireto)
-        loadingPanel(quantidadeCarrinho)
+        await loadingPanel(quantidadeCarrinho)
     else
-        quantidadeCarrinho()
+        await quantidadeCarrinho()
 }
 
-export const carrinhoVazio = () => {
+export const carrinhoVazio = async () => {
     let carrinho = {
         planos: {
             Mensal: {

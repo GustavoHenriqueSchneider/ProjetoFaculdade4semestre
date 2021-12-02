@@ -1,8 +1,7 @@
 import { adicionarCarrinho } from "./adicionarCarrinho.js"
 import { calcularTotalItem } from "./carregarDados.js"
-import { loadingPanel } from "./loading.js"
 
-export const aumentarQntd = (parent) => {
+export const aumentarQntd = async (parent) => {
     let campoQntd = parent.querySelector('.qntd')
     let quantidade = parseInt(campoQntd.textContent, 10)
 
@@ -12,7 +11,7 @@ export const aumentarQntd = (parent) => {
     campoQntd.textContent = quantidade
 }
 
-export const diminuirQntd = (parent) => {
+export const diminuirQntd = async (parent) => {
     let campoQntd = parent.querySelector('.qntd')
     let quantidade = parseInt(campoQntd.textContent, 10)
 
@@ -25,23 +24,23 @@ export const diminuirQntd = (parent) => {
     return --quantidade
 }
 
-export const aumentarQntdCarrinho = (parent) => {
+export const aumentarQntdCarrinho = async (parent) => {
 
     const plano = parent.parentNode.querySelector('.plano').textContent
 
-    aumentarQntd(parent)
-    adicionarCarrinho(parent, plano, true)
-    loadingPanel(calcularTotalItem, parent, plano)
+    await aumentarQntd(parent)
+    await adicionarCarrinho(parent, plano, true)
+    await calcularTotalItem(parent, plano)
 }
 
-export const diminuirQntdCarrinho = (parent) => {
+export const diminuirQntdCarrinho = async (parent) => {
 
     const plano = parent.parentNode.querySelector('.plano').textContent
 
-    const quantidade = diminuirQntd(parent)
+    const quantidade = await diminuirQntd(parent)
     
     if (quantidade >= 1){
-        adicionarCarrinho(parent, plano, true)
-        loadingPanel(calcularTotalItem, parent, plano)
+        await adicionarCarrinho(parent, plano, true)
+        await calcularTotalItem(parent, plano)
     }   
 }
