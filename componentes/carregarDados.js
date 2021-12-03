@@ -4,7 +4,7 @@ import { buyListeners } from "./listeners.js"
 
 export const quantidadeCarrinho = async () => {
 
-    let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || carrinhoVazio()
+    let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || await carrinhoVazio()
     let quantidadeCarrinho = 0
     const planos = carrinho.planos
     const itensCarrinho = document.getElementById('qntdCarrinho')
@@ -55,13 +55,16 @@ export const itensCarrinho = async (insertListeners) => {
 
                 let text = document.createElement('h3')
                 text.classList.add('tituloItem')
-                text.textContent = `${numeroItem} - Pacote `
+                text.textContent = `${numeroItem} - Pacote '`
 
                 let plano = document.createElement('strong')
                 plano.classList.add('plano')
                 plano.textContent = item
 
+                let txt = document.createTextNode(` Proteção'`)
+
                 text.appendChild(plano)
+                text.appendChild(txt)
 
                 let table = document.createElement('table')
                 table.classList.add('valores')
@@ -203,7 +206,9 @@ export const calcularTotal = async () => {
 
     valorTotal += await calcularFrete()
 
-    valorTotalSpan.textContent = valorTotal.toFixed(2).toString().replace('.', ',')
+    let total = valorTotal.toFixed(2).toString().replace('.', ',')
+
+    valorTotalSpan.textContent = `R$ ${total}`
 
     return true
 }

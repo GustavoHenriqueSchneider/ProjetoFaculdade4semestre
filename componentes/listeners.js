@@ -42,15 +42,19 @@ export const buyListeners = async () => {
 
     for (let btn of btnDiminuirQntd) {
         btn.addEventListener('click', async () => {
-            await diminuirQntdCarrinho(btn.parentNode)
-            await loadingPanel(calcularTotal)
+            const quantidade = await diminuirQntdCarrinho(btn.parentNode)
+
+            if(quantidade >= 1)
+                await loadingPanel(calcularTotal)
         })
     }
 
     for (let btn of btnAumentarQntd) {
         btn.addEventListener('click', async () => {
-            await aumentarQntdCarrinho(btn.parentNode)
-            await loadingPanel(calcularTotal)
+            const quantidade = await aumentarQntdCarrinho(btn.parentNode)
+
+            if(quantidade <= 100)
+                await loadingPanel(calcularTotal)
         })
     }
 

@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <title>Alarm Safe</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/style.css">
-    <link rel="shortcut icon" href="/favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="./imagens/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
 </head>
@@ -52,15 +49,16 @@
                     <label for="frete2">R$ 25,00 - Entrega em até 3 úteis</label>
                 </div>
             </div>
-            <span id="precoFrete">Valor do Frete <strong>R$ 10,00</strong></span>
-            <span id="precoTotal">Valor Total R$<strong>0</strong></span>
-            <button>COMPRAR</button>
+            <div id="precosFinais">
+                <span id="precoFrete">Valor do Frete <strong>R$ 10,00</strong></span>
+                <span id="precoTotal">Valor Total <strong>R$ 0,00</strong></span>
+                <button id="btnComprar">COMPRAR</button>
+            </div>
         </div>
     </main>
     <footer>
         <h4 class="text footerText">Alarm Safe - Projeto Uninove 2º Semestre 2021</h4>
     </footer>
-    <script type="module" src="buy.js"></script>
+    <script type="module" src="./buy.js"></script>
 </body>
-
 </html>

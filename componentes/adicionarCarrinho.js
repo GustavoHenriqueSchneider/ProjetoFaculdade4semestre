@@ -3,7 +3,7 @@ import { loadingPanel } from "./loading.js"
 
 export const adicionarCarrinho = async (parent, plano, carrinhoDireto) => {
 
-    let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || carrinhoVazio()
+    let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || await carrinhoVazio()
 
     if (!plano)
         plano = parent.querySelector('.plano').textContent
@@ -31,15 +31,15 @@ export const adicionarCarrinho = async (parent, plano, carrinhoDireto) => {
 export const carrinhoVazio = async () => {
     let carrinho = {
         planos: {
-            Mensal: {
+            Baixa: {
                 quantidade: 0,
                 preco: 29.99
             },
-            Semestral: {
+            Média: {
                 quantidade: 0,
                 preco: 161.94
             },
-            Anual: {
+            Alta: {
                 quantidade: 0,
                 preco: 291.49
             }
