@@ -1,6 +1,8 @@
 
 export const loadingPanel = async (funcao, param1, param2) => {
 
+    await bloquearClicks()
+
     const delay = 1000
 
     let loading = document.createElement('div')
@@ -13,6 +15,14 @@ export const loadingPanel = async (funcao, param1, param2) => {
 
     let body = document.querySelector('body')
     body.appendChild(loading)
+
+    let header = document.querySelector('header')
+    let main = document.querySelector('main')
+    let footer = document.querySelector('footer')
+
+    header.style.display = 'none'
+    main.style.display = 'none'
+    footer.style.display = 'none'
 
     setTimeout(async () => {
 
@@ -28,5 +38,25 @@ export const loadingPanel = async (funcao, param1, param2) => {
 
         body.removeChild(loading)
 
+        await desbloquearClicks()
+
+        header.removeAttribute('style')
+        main.removeAttribute('style')
+        footer.removeAttribute('style')
+
     }, delay);
+}
+
+const bloquearClicks = async () => {
+
+    let body = document.querySelector('body')
+
+    body.style.pointerEvents = "none"
+    
+}
+const desbloquearClicks = async () => {
+
+    let body = document.querySelector('body')
+
+    body.style.pointerEvents = "auto"
 }
