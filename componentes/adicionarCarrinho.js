@@ -33,15 +33,15 @@ export const carrinhoVazio = async () => {
         planos: {
             Baixa: {
                 quantidade: 0,
-                preco: 29.99
+                preco: 99.99
             },
             Média: {
                 quantidade: 0,
-                preco: 161.94
+                preco: 159.99
             },
             Alta: {
                 quantidade: 0,
-                preco: 291.49
+                preco: 299.99
             }
         }
     }

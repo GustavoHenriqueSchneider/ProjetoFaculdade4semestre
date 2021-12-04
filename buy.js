@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         btnComprar.addEventListener('click', async () => {
             await loadingPanel(async () => {
-                window.location.pathname = '/aviso.html'
+                window.location.pathname = '/error.html'
             })
         })
     }
