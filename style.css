@@ -19,7 +19,6 @@ body {
     flex-direction: column;
     min-height: 100%;
     min-width: 100%;
-    height: 100%;
     justify-content: space-between;
     background-color: var(--color2);
 }
@@ -35,6 +34,7 @@ header {
     padding: 0 10%;
     box-sizing: border-box;
     position: fixed;
+    z-index: 1;
     top: 0;
 }
 
@@ -70,7 +70,7 @@ header {
 }
 
 .btnHeader::selection, .footerText::selection, #title::selection,
-#mensagemCarrinhoVazio::selection, .preco::selection, .qntd::selection {
+#mensagemCarrinhoVazio::selection, .preco::selection, .qntd::selection, #mensagemAviso::selection {
     background-color: transparent;
 }
 
@@ -82,6 +82,19 @@ header {
     word-break: normal;
     padding: 1rem 0;
     text-align: center;
+}
+
+#inicio {
+    text-align: center;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    opacity: 0.8;
+    font-size: 2rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #mensagemCarrinho {
@@ -102,8 +115,40 @@ header {
     align-items: center;
 }
 
+#precos ul > li {
+    margin-bottom: 0.5rem;
+}
+
+#precos ul > li > i {
+    margin-left: 0.2rem;
+}
+
+#precos ul > li:last-of-type {
+    margin-bottom: 0;
+}
+
+#precos ul {
+    padding: 0 1.5rem;
+}
+
+#mensagemAviso {
+    opacity: 0.25;
+    font-size: 2.5rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+}
+
 #mensagemCarrinhoVazio > i {
     margin-left: 1rem;
+}
+
+#mensagemAviso > i {
+    margin-right: 2rem;
+    font-size: 10rem;
 }
 
 .disabled {
@@ -314,6 +359,7 @@ footer {
 }
 
 .beneficios {
+    font-weight: bold;
     margin: 0 0 1rem 0;
     text-align: center;
     text-transform: capitalize;
@@ -410,6 +456,7 @@ footer {
     opacity: 0.8;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .spin{

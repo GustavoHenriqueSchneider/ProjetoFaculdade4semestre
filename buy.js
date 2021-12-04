@@ -7,6 +7,7 @@ import { calcularTotal } from "./componentes/carregarDados.js"
 document.addEventListener('DOMContentLoaded', async () => {
     const itemsLoaded = await itensCarrinho()
     const radiosFrete = document.querySelectorAll('input[id^="frete"]')
+    const btnComprar = document.getElementById('btnComprar')
 
     if (itemsLoaded) {
 
@@ -18,5 +19,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 await loadingPanel(calcularTotal)
             })
         }
+
+        btnComprar.addEventListener('click', async () => {
+            await loadingPanel(async () => {
+                window.location.pathname = '/aviso.html'
+            })
+        })
     }
 })
