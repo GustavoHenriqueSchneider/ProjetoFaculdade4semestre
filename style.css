@@ -262,6 +262,10 @@ input[name="frete"] {
     margin: 0 1rem 0 0;
 }
 
+input[name="frete"]:focus {
+    outline: none;
+}
+
 #precosFinais {
     justify-content: center;
     height: 3rem;
@@ -456,7 +460,7 @@ footer {
     opacity: 0.8;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    pointer-events: none;
 }
 
 .spin{
